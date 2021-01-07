@@ -1,0 +1,36 @@
+{
+    "name": "metglobal/utils",
+    "description": "Compass php utility helpers",
+    "type": "library",
+    "keywords": [
+        "utility",
+        "utils",
+        "helper"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Burak Bolat",
+            "email": "burak.bolat@metglobal.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Metglobal\\Utils\\": "src/"
+        },
+        "files": [ "src/helpers.php" ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Metglobal\\Utils\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
