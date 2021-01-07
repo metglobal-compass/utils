@@ -18,7 +18,9 @@
         "psr-4": {
             "Metglobal\\Utils\\": "src/"
         },
-        "files": [ "src/helpers.php" ]
+        "files": [
+            "helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
