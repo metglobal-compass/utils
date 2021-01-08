@@ -6,14 +6,14 @@ class Optional
 {
     /**
      * The target being transformed
-     * Use _ prefix to avoid namespace conflict on __get()
+     * Use _ prefix to avoid namespace conflict on __get().
      *
      * @var mixed
      */
     protected $_target;
 
     /**
-     * Create a new transform proxy instance
+     * Create a new transform proxy instance.
      *
      * @param mixed $_target
      */
@@ -23,9 +23,10 @@ class Optional
     }
 
     /**
-     * Dynamically pass property fetching to the target when it's present
+     * Dynamically pass property fetching to the target when it's present.
      *
      * @param string $name
+     *
      * @return mixed
      */
     public function __get($name)
@@ -36,7 +37,7 @@ class Optional
     }
 
     /**
-     * Dynamically pass method calls to the target when it's present
+     * Dynamically pass method calls to the target when it's present.
      *
      * @param $name
      * @param $arguments
@@ -52,7 +53,7 @@ class Optional
 
     /**
      * Allow optional(null)->present()->prop to return null without a decorated
-     * null deference exception
+     * null deference exception.
      *
      * @return mixed|Optional
      */

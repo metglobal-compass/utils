@@ -7,8 +7,6 @@ class Str
     /**
      * Generate random string.
      *
-     * @param int $length
-     * @return string
      * @throws \Exception
      */
     public static function random(int $length = 8): string
@@ -19,14 +17,12 @@ class Str
     /**
      * Determine if a given string starts with a given substring.
      *
-     * @param string $haystack
      * @param string|array $needles
-     * @return bool
      */
     public static function starts(string $haystack, $needles): bool
     {
-        foreach ((array)$needles as $needle) {
-            if ($needle !== '' && substr($haystack, 0, strlen($needle)) === (string)$needle) {
+        foreach ((array) $needles as $needle) {
+            if ('' !== $needle && substr($haystack, 0, strlen($needle)) === (string) $needle) {
                 return true;
             }
         }
@@ -37,14 +33,12 @@ class Str
     /**
      * Determine if a given string ends with a given substring.
      *
-     * @param string $haystack
      * @param string|string[] $needles
-     * @return bool
      */
     public static function ends(string $haystack, $needles): bool
     {
-        foreach ((array)$needles as $needle) {
-            if ($needle !== '' && substr($haystack, -strlen($needle)) === (string)$needle) {
+        foreach ((array) $needles as $needle) {
+            if ('' !== $needle && substr($haystack, -strlen($needle)) === (string) $needle) {
                 return true;
             }
         }
@@ -55,14 +49,13 @@ class Str
     /**
      * Determine if a given string contains a given substring.
      *
-     * @param string $haystack
+     * @param string       $haystack
      * @param string|array $needles
-     * @return bool
      */
     public static function contains($haystack, $needles): bool
     {
-        foreach ((array)$needles as $needle) {
-            if ($needle != '' && mb_strpos($haystack, $needle) !== false) {
+        foreach ((array) $needles as $needle) {
+            if ('' != $needle && false !== mb_strpos($haystack, $needle)) {
                 return true;
             }
         }
@@ -72,9 +65,6 @@ class Str
 
     /**
      * Generate a slug.
-     *
-     * @param string $string
-     * @return string
      */
     public static function slug(string $string): string
     {
@@ -101,10 +91,6 @@ class Str
 
     /**
      * Interpolate a message with context.
-     *
-     * @param string $message
-     * @param array $context
-     * @return string
      */
     public static function interpolate(string $message, array $context = []): string
     {
@@ -125,9 +111,10 @@ class Str
      * Replace char(s) by any character.
      *
      * @param string $string
-     * @param int $first
-     * @param int $last
+     * @param int    $first
+     * @param int    $last
      * @param string $replace
+     *
      * @return string
      */
     public static function replaceCharWith($string = '', $first = 0, $last = 0, $replace = '*')

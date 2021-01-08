@@ -13,8 +13,6 @@ class Collection
 
     /**
      * Create a new collection.
-     *
-     * @param array $items
      */
     public function __construct(array $items = [])
     {
@@ -25,6 +23,7 @@ class Collection
      * Create a new collection.
      *
      * @param array $items
+     *
      * @return static
      */
     public static function make($items = []): Collection
@@ -36,9 +35,10 @@ class Collection
      * Sort through each item with a callback.
      *
      * @param callable|int|null $callback
+     *
      * @return static
      */
-    public function sort($callback = null)
+    public function sort($callback = null): Collection
     {
         $items = $this->items;
 
@@ -52,11 +52,12 @@ class Collection
     /**
      * Sort the collection keys.
      *
-     * @param int $options
+     * @param int  $options
      * @param bool $descending
+     *
      * @return static
      */
-    public function sortKeys($options = SORT_REGULAR, $descending = false)
+    public function sortKeys($options = SORT_REGULAR, $descending = false): Collection
     {
         $items = $this->items;
 
@@ -70,6 +71,7 @@ class Collection
      *
      * @param int $from
      * @param int $to
+     *
      * @return static
      */
     public function range($from, $to, $step = 1): Collection
@@ -79,8 +81,6 @@ class Collection
 
     /**
      * Get all of the items in the collection.
-     *
-     * @return array
      */
     public function all(): array
     {
@@ -101,23 +101,20 @@ class Collection
      * Determine if an item exists in the collection.
      *
      * @param mixed $key
-     * @param mixed $operator
-     * @param mixed $value
-     * @return bool
      */
-    public function contains($key): bool
+    public function contains($key, bool $strict = false): bool
     {
-        return in_array($key, $this->items);
+        return in_array($key, $this->items, $strict);
     }
 
     /**
      * Search the collection for a given value and return the corresponding key if successful.
      *
      * @param mixed $value
-     * @param bool $strict
+     *
      * @return mixed
      */
-    public function search($value, $strict = false)
+    public function search($value, bool $strict = false)
     {
         if (!$this->useAsCallable($value)) {
             return array_search($value, $this->items, $strict);
@@ -135,8 +132,6 @@ class Collection
     /**
      * Get the items in the collection that are not present in the given items.
      *
-     * @param mixed $items
-     * @param callable $callback
      * @return static
      */
     public function diff(array $items, callable $callback): Collection
@@ -147,7 +142,8 @@ class Collection
     /**
      * Get all items except for those with the specified keys.
      *
-     * @param mixed $keys
+     * @param string|array $keys
+     *
      * @return static
      */
     public function except($keys): Collection
@@ -158,10 +154,11 @@ class Collection
     /**
      * Get the items with the specified keys.
      *
-     * @param mixed $keys
+     * @param string|array $keys
+     *
      * @return static
      */
-    public function only($keys)
+    public function only($keys): Collection
     {
         if (is_null($keys)) {
             return new static($this->items);
@@ -175,8 +172,8 @@ class Collection
     /**
      * Get the first item from the collection passing the given truth test.
      *
-     * @param callable|null $callback
      * @param mixed $default
+     *
      * @return mixed
      */
     public function first(callable $callback = null, $default = null)
@@ -187,8 +184,8 @@ class Collection
     /**
      * Get the last item from the collection.
      *
-     * @param callable|null $callback
      * @param mixed $default
+     *
      * @return mixed
      */
     public function last(callable $callback = null, $default = null)
@@ -201,6 +198,7 @@ class Collection
      *
      * @param mixed $key
      * @param mixed $default
+     *
      * @return mixed
      */
     public function get($key, $default = null)
@@ -212,38 +210,12 @@ class Collection
         return value($default);
     }
 
-    public function getString($key, $default = '')
-    {
-        return (string)$this->get($key, $default);
-    }
-
-    public function getBool($key, $default = false)
-    {
-        return (bool)$this->get($key, $default);
-    }
-
-    public function getInt($key, $default = 0)
-    {
-        return (int)$this->get($key, $default);
-    }
-
-    public function getFloat($key, $default = 0)
-    {
-        return (float)$this->get($key, $default);
-    }
-
-    public function getArray($key, $default = [])
-    {
-        return (array)$this->get($key, $default);
-    }
-
     /**
      * Determine if an item exists in the collection by key.
      *
      * @param mixed $key
-     * @return bool
      */
-    public function has($key)
+    public function has($key): bool
     {
         $keys = is_array($key) ? $key : func_get_args();
 
@@ -259,10 +231,9 @@ class Collection
     /**
      * Run a map over each of the items.
      *
-     * @param callable $callback
      * @return static
      */
-    public function map(callable $callback)
+    public function map(callable $callback): Collection
     {
         $keys = array_keys($this->items);
 
@@ -274,10 +245,9 @@ class Collection
     /**
      * Run a filter over each of the items.
      *
-     * @param callable|null $callback
      * @return static
      */
-    public function filter(callable $callback = null)
+    public function filter(callable $callback = null): Collection
     {
         if ($callback) {
             return new static(Arr::where($this->items, $callback));
@@ -288,10 +258,8 @@ class Collection
 
     /**
      * Count the number of items in the collection.
-     *
-     * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->items);
     }
@@ -300,9 +268,8 @@ class Collection
      * Determine if the given value is callable, but not a string.
      *
      * @param mixed $value
-     * @return bool
      */
-    protected function useAsCallable($value)
+    protected function useAsCallable($value): bool
     {
         return !is_string($value) && is_callable($value);
     }

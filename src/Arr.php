@@ -74,7 +74,7 @@ class Arr
      * Get an item from an array using "dot" notation.
      *
      * @param string|int|null $key
-     * @param mixed $default
+     * @param mixed           $default
      *
      * @return mixed
      */
@@ -118,7 +118,7 @@ class Arr
     {
         $original = &$array;
 
-        $keys = (array)$keys;
+        $keys = (array) $keys;
 
         if (0 === count($keys)) {
             return;
@@ -158,7 +158,7 @@ class Arr
      */
     public static function has(array $array, $keys): bool
     {
-        $keys = (array)$keys;
+        $keys = (array) $keys;
 
         if (!$array || [] === $keys) {
             return false;
@@ -202,7 +202,7 @@ class Arr
      */
     public static function only(array $array, $keys): array
     {
-        return array_intersect_key($array, array_flip((array)$keys));
+        return array_intersect_key($array, array_flip((array) $keys));
     }
 
     /**
@@ -260,7 +260,7 @@ class Arr
     /**
      * Get one or a specified number of random values from an array.
      *
-     * @param int|null $number
+     * @param int|null   $number
      * @param bool|false $preserveKeys
      *
      * @return mixed
@@ -274,16 +274,14 @@ class Arr
         $count = count($array);
 
         if ($requested > $count) {
-            throw new \InvalidArgumentException(
-                "You requested {$requested} items, but there are only {$count} items available."
-            );
+            throw new \InvalidArgumentException("You requested {$requested} items, but there are only {$count} items available.");
         }
 
         if (is_null($number)) {
             return $array[array_rand($array)];
         }
 
-        if (0 === (int)$number) {
+        if (0 === (int) $number) {
             return [];
         }
 
@@ -292,11 +290,11 @@ class Arr
         $results = [];
 
         if ($preserveKeys) {
-            foreach ((array)$keys as $key) {
+            foreach ((array) $keys as $key) {
                 $results[$key] = $array[$key];
             }
         } else {
-            foreach ((array)$keys as $key) {
+            foreach ((array) $keys as $key) {
                 $results[] = $array[$key];
             }
         }
@@ -470,7 +468,7 @@ class Arr
      * Sort an array recursively by key.
      *
      * @param mixed $array
-     * @param int $sortFlags
+     * @param int   $sortFlags
      */
     public static function ksortRecursive(&$array, $sortFlags = SORT_REGULAR): bool
     {
